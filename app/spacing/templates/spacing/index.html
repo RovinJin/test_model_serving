@@ -1,0 +1,51 @@
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>Adjusting Spacing</title>
+        <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            // event bind
+
+            function init(){
+                $('#btn').click(submit);
+            }
+            
+
+            function submit(event){
+                if( $('#txt').length == 0 ){
+                    alert('검사할 문장을 입력해 주세요.');
+                    return  ;
+                }
+                
+                $.ajax({
+                    type:'POST',
+                    url:'check_spacing',
+                    data:{
+                        textValue:$('#txt').val()
+                    }
+    
+                }).done((data)=>{
+                    console.log(data.result);
+                    $('#result').val(data.result);
+                })
+            }
+        </script>
+    </head>
+    <body onload="init()">
+        <div>
+            <h1>Test spacing {{step}}</h1>
+        </div>
+        <div id="form">
+            <textarea name="txt" id="txt" rows="5" style="width:200px;" placeholder="여기에 띄어쓰기 검사할 내용을 쓰세요"></textarea>
+            <button id="btn">검사하기!!</button>
+        </div>
+        <div id="eval_result">
+          <textarea name="result" id="result" rows="5" style="width:200px;" placeholder="여긴 결과 표시!" readonly="true"></textarea>
+        </div>
+
+        
+    </body>
+</html>

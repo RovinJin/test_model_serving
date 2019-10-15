@@ -1,0 +1,2 @@
+Django
+pycrfsuite_spacing
